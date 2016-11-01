@@ -16,7 +16,7 @@ environment:
   CONDA_PY: "27"
   BINSTAR_TOKEN:
     # The BINSTAR_TOKEN secure variable. This is defined canonically in conda-forge.yml.
-    secure: MP4hZYylDyUWEsrt3u3cod2sbFeRwUziH02mvQOdbjsTO/l1yIxDkP/76rSIjcGC
+    secure: m2QrVFGYgRlzi1bqI1DO7pYUOPGTaU+27aQtXA3V35GrOkDK43mESP96gnCZHyYr
 
   matrix:
     - TARGET_ARCH: x64
@@ -68,4 +68,4 @@ build: off
 test_script:
     - "%CMD_IN_ENV% conda build recipe --quiet"
 deploy_script:
-    - cmd: upload_or_check_non_existence .\recipe conda-forge --channel=main
+    - cmd: upload_or_check_non_existence .\recipe tomkooij --channel=main
