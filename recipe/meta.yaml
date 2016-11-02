@@ -1,4 +1,4 @@
-{% set version = "1.10.0-patch1" %}
+{% set version = "1.10.0patch1" %}
 
 package:
   name: hdf5
