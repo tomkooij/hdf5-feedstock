@@ -16,7 +16,7 @@ environment:
   CONDA_PY: "27"
   BINSTAR_TOKEN:
     # The BINSTAR_TOKEN secure variable. This is defined canonically in conda-forge.yml.
-    secure: m2QrVFGYgRlzi1bqI1DO7pYUOPGTaU+27aQtXA3V35GrOkDK43mESP96gnCZHyYr
+    secure: dJAIRyuG3iitWpvoMzFjaA/QkVVvF2g4pO1Sw9xmpyYYToBVAm7S/zxK+nJsw9J0
 
   matrix:
     - TARGET_ARCH: x64
@@ -67,5 +67,16 @@ build: off
 
 test_script:
     - "%CMD_IN_ENV% conda build recipe --quiet"
-deploy_script:
-    - cmd: upload_or_check_non_existence .\recipe tomkooij --channel=main
+
+  # we'll use a simple python script.
+    - python ci_support\move-conda-package.py recipe
+
+artifacts:
+    # Archive the generated conda package in the ci.appveyor.com build report.
+    - path: '*.tar.bz2'
+
+on_success:
+    # Upload built binaries to binstar.org. The globbing and handling of the
+    # exit-status code is tricky in cmd.exe or powershell, so we're just using
+    #  a python script.
+    - python ci_support\binstar-push.py
