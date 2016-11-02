@@ -69,7 +69,8 @@ test_script:
     - "%CMD_IN_ENV% conda build recipe --quiet"
 
   # we'll use a simple python script.
-    - python ci_support\move-conda-package.py recipe
+    - conda render recipe > meta.yaml
+    - python ci_support\move-conda-package.py .
 
 artifacts:
     # Archive the generated conda package in the ci.appveyor.com build report.
