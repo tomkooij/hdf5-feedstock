@@ -20,6 +20,9 @@ environment:
 
   matrix:
     - TARGET_ARCH: x64
+      CONDA_PY: 27
+
+    - TARGET_ARCH: x64
       CONDA_PY: 35
 
 
